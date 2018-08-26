@@ -20,7 +20,7 @@ var sum = (array) =>{
  if(!array.length){
    return 0
    }
- return parseInt(array.slice(array.length-1),10)+sum(array.slice(0, -1))
+ return parseInt(array.slice(-1),10)+sum(array.slice(0, -1))
 }
 
 // 3. Sum all numbers in an array containing nested arrays.
@@ -41,17 +41,33 @@ return isEven(n-2)
 // 5. Sum all integers below a given integer.
 // sumBelow(10); // 45
 // sumBelow(7); // 21
-var i = 0
+
 var sumBelow = function(n) {
-
-return i === n-1? i:i++ + sumBelow(n)
-
+  if(n < 0){
+    return (n + 1) + sumBelow(n + 1)
+  }
+  return n === 1 || n=== 0 ? 0 : n-1 + sumBelow(n-1)
 };
+
 
 // 6. Get the integers within a range (x, y).
 // range(2,9); // [3,4,5,6,7,8]
 var range = function(x, y) {
+  if(x > y){
+    if(x === y+2){
+      return x-1
+    }
+      return Array.prototype.concat(x-1, range(x-1,y))
+  } else if (y - x === 1 || y === x) {
+      return []
+  } else {
+    if(x === y-2){
+      return x+1
+    }
+      return Array.prototype.concat(x+1, range(x+1,y))
+    }
 };
+
 
 // 7. Compute the exponent of a number.
 // The exponent of a number says how many times the base number is used as a factor.
